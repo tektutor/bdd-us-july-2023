@@ -36,3 +36,25 @@
 -  supports about 70+ spoken languages
 - BDD Test cases can be used as a live document
 - 
+
+
+## Testing REST API using Specflow with RESTSharp
+```
+var client = new RestClient("https://realtor.p.rapidapi.com/properties/v3/list");
+
+            var request = new RestRequest();
+
+            request.AddHeader("content-type", "application/json");
+
+            request.AddHeader("X-RapidAPI-Key", "SIGN-UP-FOR-KEY");
+
+            request.AddHeader("X-RapidAPI-Host", "realtor.p.rapidapi.com");
+
+            request.AddParameter("application/json", "{\r\n\t\"limit\": 200,\r\n\t\"offset\": 0,\r\n\t\"postal_code\": \"90004\",\r\n\t\"status\": [\"for_sale\", \"ready_to_build\"],\r\n\t\"sort\": {\r\n\t\t\"direction\": \"desc\",\r\n\t\t\"field\": \"list_date\"\r\n\t}\r\n}", ParameterType.RequestBody);
+
+            request.Method = Method.Post;
+
+            var response = client.Execute(request);
+
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+```
